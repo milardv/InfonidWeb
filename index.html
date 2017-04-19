@@ -21,11 +21,17 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+
+    <link href="justified-nav.css" rel="stylesheet">
+
     <!-- Our Website CSS Styles -->
     <link rel="stylesheet" href="css/main.css">
 
 </head>
-<body ng-app="tutorialWebApp">
+<body ng-app="app">
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -45,7 +51,27 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
 
 <!-- Our Website Javascripts -->
-<script src="js/main.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+<script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
+<script>
+    var config = {
+        apiKey: "AIzaSyDp61s00WOYg2xt4jLUdxZgtxYBuGC2z90",
+        authDomain: "infonid-e83a2.firebaseapp.com",
+        databaseURL: "https://infonid-e83a2.firebaseio.com",
+        storageBucket: "infonid-e83a2.appspot.com",
+        messagingSenderId: "294600999902"
+    };
+    firebase.initializeApp(config);
+</script>
+
 
 </body>
 </html>

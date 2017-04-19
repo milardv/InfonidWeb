@@ -6,8 +6,9 @@
 /**
  * Main AngularJS Web Application
  */
-var app = angular.module('tutorialWebApp', [
-  'ngRoute'
+var app = angular.module('app', [
+  'ngRoute',
+    'firebase'
 ]);
 
 /**
@@ -21,9 +22,10 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
     .when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"})
     .when("/pricing", {templateUrl: "partials/pricing.html", controller: "PageCtrl"})
-    .when("/services", {templateUrl: "partials/services.html", controller: "PageCtrl"})
+    .when("/services", {templateUrl: "partials/carte.html", controller: "PageCtrl"})
     .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
-    // Blog
+      .when("/login", {templateUrl: "partials/login.html", controller: "LoginController"})
+      // Blog
     .when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"})
     .when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"})
     // else 404
@@ -53,3 +55,29 @@ app.controller('PageCtrl', function (/* $scope, $location, $http */) {
     selector: "a[data-toggle=tooltip]"
   })
 });
+
+/**
+ * Controls the Login
+ */
+app.controller('HomeCtrl', ['$scope', '$firebaseSimpleLogin', function($scope, $firebaseSimpleLogin) {
+    var firebaseObj = new Firebase("https://infonid-e83a2.firebaseio.com");
+    var loginObj = $firebaseSimpleLogin(firebaseObj);
+
+    $scope.user = {};
+    $scope.SignIn = function(e){
+        e.preventDefault();
+        var username = $scope.user.email;
+        var password = $scope.user.password;
+        loginObj.$login('password', {
+            email: username,
+            password: password
+        })
+            .then(function(user) {
+                //Success callback
+                console.log('Authentication successful');
+            }, function(error) {
+                //Failure callback
+                console.log('Authentication failure');
+            });
+    }
+}]);
