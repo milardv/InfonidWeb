@@ -10,7 +10,7 @@
 <head>
 
     <!-- Meta-Information -->
-    <title>ACME Inc.</title>
+    <title>InfoNid</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="ACME Inc.">
@@ -25,10 +25,9 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
 
-    <link href="justified-nav.css" rel="stylesheet">
-
     <!-- Our Website CSS Styles -->
     <link rel="stylesheet" href="css/main.css">
+    <link href="justified-nav.css" rel="stylesheet">
 
 </head>
 <body ng-app="app">
@@ -52,6 +51,9 @@
 
 <!-- Our Website Javascripts -->
 <script src="js/app.js"></script>
+<script src="js/auth/login.controller.js"></script>
+<script src="js/map/map.controller.js"></script>
+<script src="js/auth/auth.service.js"></script>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
@@ -61,17 +63,6 @@
 <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script>
 <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
 <script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
-<script>
-    var config = {
-        apiKey: "AIzaSyDp61s00WOYg2xt4jLUdxZgtxYBuGC2z90",
-        authDomain: "infonid-e83a2.firebaseapp.com",
-        databaseURL: "https://infonid-e83a2.firebaseio.com",
-        storageBucket: "infonid-e83a2.appspot.com",
-        messagingSenderId: "294600999902"
-    };
-    firebase.initializeApp(config);
-</script>
-
 
 </body>
 </html>

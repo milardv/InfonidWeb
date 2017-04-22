@@ -1,15 +1,23 @@
 /**
- * AngularJS Tutorial 1
- * @author Nick Kaye <nick.c.kaye@gmail.com>
- */
-
-/**
  * Main AngularJS Web Application
  */
 var app = angular.module('app', [
   'ngRoute',
-    'firebase'
+  'firebase',
+  'app.map',
+    'app.auth'
 ]);
+
+app.config(function(){
+  var config = {
+    apiKey: "AIzaSyDp61s00WOYg2xt4jLUdxZgtxYBuGC2z90",
+    authDomain: "infonid-e83a2.firebaseapp.com",
+    databaseURL: "https://infonid-e83a2.firebaseio.com",
+    storageBucket: "infonid-e83a2.appspot.com",
+    messagingSenderId: "294600999902"
+  };
+  firebase.initializeApp(config);
+});
 
 /**
  * Configure the Routes
@@ -22,7 +30,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
     .when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"})
     .when("/pricing", {templateUrl: "partials/pricing.html", controller: "PageCtrl"})
-    .when("/services", {templateUrl: "partials/carte.html", controller: "PageCtrl"})
+    .when("/carte", {templateUrl: "partials/map.html", controller: "MapController"})
     .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
       .when("/login", {templateUrl: "partials/login.html", controller: "LoginController"})
       // Blog
@@ -81,3 +89,4 @@ app.controller('HomeCtrl', ['$scope', '$firebaseSimpleLogin', function($scope, $
             });
     }
 }]);
+
