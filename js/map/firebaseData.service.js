@@ -1,22 +1,15 @@
-(function() {
-  'use strict';
+'use strict';
 
-  angular
-    .module('app.map')
-    .factory('firebaseDataService', firebaseDataService);
-
-  function firebaseDataService() {
-    console.log(firebase);
+angular.module('app.map')
+  .factory('MapService', function(){
     var root = firebase.database().ref();
+    console.log('MapService');
 
-    var dataService = {
+    var MapService = {
       root: root,
-      users: root.child('users'),
-      nests: root.child('nests')
+      users: root.get('users'),
+      nests: root.get('nests')
     };
 
-    console.log(root);
-
-    return dataService;
-  }
-})();
+    return MapService;
+  });

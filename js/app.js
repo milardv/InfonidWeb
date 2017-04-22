@@ -5,19 +5,8 @@ var app = angular.module('app', [
   'ngRoute',
   'firebase',
   'app.map',
-    'app.auth'
+  'app.auth'
 ]);
-
-app.config(function(){
-  var config = {
-    apiKey: "AIzaSyDp61s00WOYg2xt4jLUdxZgtxYBuGC2z90",
-    authDomain: "infonid-e83a2.firebaseapp.com",
-    databaseURL: "https://infonid-e83a2.firebaseio.com",
-    storageBucket: "infonid-e83a2.appspot.com",
-    messagingSenderId: "294600999902"
-  };
-  firebase.initializeApp(config);
-});
 
 /**
  * Configure the Routes
@@ -38,6 +27,15 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"})
     // else 404
     .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
+
+  var config = {
+    apiKey: "AIzaSyDp61s00WOYg2xt4jLUdxZgtxYBuGC2z90",
+    authDomain: "infonid-e83a2.firebaseapp.com",
+    databaseURL: "https://infonid-e83a2.firebaseio.com",
+    storageBucket: "infonid-e83a2.appspot.com",
+    messagingSenderId: "294600999902"
+  };
+  firebase.initializeApp(config);
 }]);
 
 /**
