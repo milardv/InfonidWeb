@@ -6,7 +6,6 @@ angular.module('app.map', ['firebase'])
   .controller('MapController', ['$scope', '$firebaseArray', function ($scope, $firebaseArray){
 
     L.mapbox.accessToken = 'pk.eyJ1IjoidmFscmVmZ2VvIiwiYSI6ImNpdndlZDFyNTAxNGoyenBkZ3d1Z2phZmMifQ.nzDRmWqsETzMwJyIwrNazQ';
-    //mapboxgl.accessToken = 'pk.eyJ1IjoidmFscmVmZ2VvIiwiYSI6ImNpdndlZDFyNTAxNGoyenBkZ3d1Z2phZmMifQ.nzDRmWqsETzMwJyIwrNazQ';
 
     var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
       attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -35,25 +34,10 @@ angular.module('app.map', ['firebase'])
         angular.forEach($scope.nests, function(user) {
           angular.forEach(user, (function(nest) {
             if (nest && nest['diameter']){
-              //L.marker([nest['lat'], nest['long']]).addTo(mapLeaflet);
-              /*var marker =
-                {
-                  type: 'Feature',
-                  geometry: {
-                    type: 'Point',
-                    coordinates: [nest['long'], nest['lat']]
-                  },
-                  properties: {
-                    title: 'Nid : ' + nest['type'],
-                    description: "Détruit le " + nest['moment'] + "  " + "Hauteur: " + nest["height"] + "cm",
-                    image: nest['imageUrl']
-                  }
-                };*/
-
               L.marker([nest['lat'],nest['long']]).addTo(mapLeaflet).bindPopup('<img style="width: 50px" src="' + nest['imgURL'] + '">' +
-                ' <h2>' + "Nid : " + nest['type'] + '</h2>');
-
-           //   geojson.push(marker);
+                ' <h2>' + "Nid : " + nest['type'] + '</h2>' +
+                ' <p>' + "Hauteur : " + nest['height'] + "cm   " + "Diamètre : " + nest['height'] + "cm" + '</p>' +
+                ' <p>' + "Détruit le " + nest['moment'] + '</p>');
             }
           }));
         })
@@ -64,4 +48,14 @@ angular.module('app.map', ['firebase'])
     });
 
     var myLayer = L.mapbox.featureLayer().addTo(mapLeaflet);
+
+    $scope.saveJSON = function () {
+      $scope.toJSON = '';
+      $scope.toJSON = angular.toJson($scope.nests);
+      var blob = new Blob([$scope.toJSON], { type:"application/json;charset=utf-8;" });
+      var downloadLink = angular.element('<a></a>');
+      downloadLink.attr('href', window.URL.createObjectURL(blob));
+      downloadLink.attr('download', 'donnée-nids.csv');
+      downloadLink[0].click();
+    };
   }]);
