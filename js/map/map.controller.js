@@ -16,7 +16,6 @@ angular.module('app.map', ['firebase'])
       .addLayer(mapboxTiles)
       .setView([46.9896, 3.159 ], 5);
 
-    var myLayer = L.mapbox.featureLayer().addTo(mapLeaflet);
 /*
     var map = new mapboxgl.Map({
       container: 'map', // container id
@@ -37,7 +36,7 @@ angular.module('app.map', ['firebase'])
           angular.forEach(user, (function(nest) {
             if (nest && nest['diameter']){
               //L.marker([nest['lat'], nest['long']]).addTo(mapLeaflet);
-              var marker =
+              /*var marker =
                 {
                   type: 'Feature',
                   geometry: {
@@ -47,19 +46,22 @@ angular.module('app.map', ['firebase'])
                   properties: {
                     title: 'Nid : ' + nest['type'],
                     description: "Détruit le " + nest['moment'] + "  " + "Hauteur: " + nest["height"] + "cm",
-                    image: nest['imgURL']
+                    image: nest['imageUrl']
                   }
-                };
-              console.log(marker);
-              geojson.push(marker);
+                };*/
+
+              L.marker([nest['lat'],nest['long']]).addTo(mapLeaflet).bindPopup('<img style="width: 50px" src="' + nest['imgURL'] + '">' +
+                ' <h2>' + "Nid : " + nest['type'] + '</h2>');
+
+           //   geojson.push(marker);
             }
           }));
         })
       }).then(function(){
-      console.log(geojson);
-      myLayer.setGeoJSON(geojson);
+
+      //myLayer.setGeoJSON(geojson);
       mapLeaflet.scrollWheelZoom.disable();
     });
 
-
+    var myLayer = L.mapbox.featureLayer().addTo(mapLeaflet);
   }]);
